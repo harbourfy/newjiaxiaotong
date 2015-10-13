@@ -210,6 +210,7 @@ public class ContactFragment extends Fragment implements LoadFinishedListener {
     @Override
     public void loadFinished(BaseModel baseModel) {
 //        loadingDialog.dismiss();
+        progressBar.setVisibility(View.GONE);
         if (baseModel.getCode() == null){
             if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
                 if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_FAMILY_CONTACT_LIST)){

@@ -41,7 +41,7 @@ public class ForwardMessageActivity extends PickContactNoCheckboxActivity {
 			Intent intent = new Intent(ForwardMessageActivity.this, AlertDialog.class);
 			intent.putExtra("cancel", true);
 			intent.putExtra("titleIsCancel", true);
-			intent.putExtra("msg", getString(R.string.confirm_forward_to, selectUser.getUsername()));
+			intent.putExtra("msg", getString(R.string.confirm_forward_to, selectUser.getNick()));
 			startActivityForResult(intent, 1);
 //		}
 	}
