@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/app_white"
+    >
+    <com.app.jiaxiaotong.weight.ViewPagerFixed
+        android:id="@+id/activity_guide_pager"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        />
+    <com.app.jiaxiaotong.weight.CirclePageIndicator
+        android:id="@+id/activity_guide_indicator"
+        android:padding="10dip"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_gravity="bottom"
+        app:radius="5dp"
+        android:layout_marginBottom="100dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guide_jump_iv"
+        android:src="@mipmap/skip_icon"/>
+
+</FrameLayout>

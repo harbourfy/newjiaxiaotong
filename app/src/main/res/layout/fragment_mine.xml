@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.jiaxiaotong.fragment.MineFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_top_bar"
+        android:background="@color/title_yellow"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/application_center_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/mine"
+            android:textColor="@color/bottom_text_color_normal"
+            android:textSize="22sp" />
+
+
+    </RelativeLayout>
+    <include layout="@layout/user_info_top_layout"
+        android:id="@+id/mine_user_info_top_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mine_user_info_layout"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:src="@mipmap/mother_default_icon"
+            android:id="@+id/mine_user_avatar_iv" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="王小花"
+            android:textSize="18sp"
+            android:id="@+id/mine_user_nickname_tv"
+            android:layout_alignTop="@+id/mine_user_avatar_iv"
+            android:layout_toRightOf="@+id/mine_user_avatar_iv"
+            android:layout_toEndOf="@+id/mine_user_avatar_iv"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13912428435"
+            android:id="@+id/mine_user_tel_tv"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/mine_user_nickname_tv"
+            android:layout_alignLeft="@+id/mine_user_nickname_tv"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/more_sel_bg"
+            android:layout_marginRight="16sp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:drawableLeft="@mipmap/person_add_icon"
+        android:drawableRight="@drawable/more_sel_bg"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/mine_user_setting_tv"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:drawableLeft="@mipmap/person_setting_icon"
+        android:drawableRight="@drawable/more_sel_bg"
+        android:textColor="@android:color/black"
+        android:padding="16sp"
+        android:drawablePadding="16dp"
+        android:text="@string/setting"
+        android:textSize="18sp"
+        />
+</LinearLayout>

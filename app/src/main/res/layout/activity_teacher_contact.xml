@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.jiaxiaotong.activity.TeacherContactActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/title_yellow">
+        <ImageView
+            android:id="@+id/title_left_back_iv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/back_select_bg"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textColor="@color/teacher_top_text_sel"
+            android:background="@drawable/teacher_left_sel"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="18sp"
+            android:layout_toLeftOf="@+id/activity_teacher_top_center_view"
+            android:text="老师"
+            android:id="@+id/activity_teacher_top_left_tv" />
+        <View
+            android:id="@+id/activity_teacher_top_center_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/activity_teacher_top_right_tv"
+            android:layout_width="wrap_content"
+            android:textColor="@color/teacher_top_text_sel"
+            android:background="@drawable/teacher_right_sel"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:text="家长"
+            android:textSize="18sp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/activity_teacher_top_center_view"
+            android:layout_toEndOf="@+id/activity_teacher_top_center_view" />
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/contact_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</LinearLayout>

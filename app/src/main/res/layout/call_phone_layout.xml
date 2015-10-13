@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/call_phone_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/call_phone_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/yellow_radius_no_sel_bg"
+            android:text="拨打电话"
+            android:textColor="@color/app_white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/call_phone_send_msg_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_radius_no_sel_bg"
+            android:text="发送信息"
+            android:textColor="@color/text_yellow"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</FrameLayout>
+

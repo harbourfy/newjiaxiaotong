@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_children_tv"
+    android:background="@color/app_white"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:text="小明"
+    android:textSize="16sp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</TextView>

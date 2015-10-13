@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.jiaxiaotong.activity.SettingActivity">
+
+    <include layout="@layout/title_bar"/>
+
+    <TextView
+        android:id="@+id/setting_server_phone_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:padding="16sp"
+        android:text="@string/server_phone"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/setting_report_info_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:padding="16sp"
+        android:text="@string/report_info"
+        android:textColor="@android:color/black"
+        android:drawableRight="@drawable/more_sel_bg"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/setting_about_app_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:padding="16sp"
+        android:text="@string/about_app"
+        android:textColor="@android:color/black"
+        android:drawableRight="@drawable/more_sel_bg"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/setting_clear_cache_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:padding="16sp"
+        android:text="@string/clear_cache"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/setting_logout_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mine_tab_sel_bg"
+        android:padding="16sp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:text="@string/button_logout" />
+
+
+</LinearLayout>

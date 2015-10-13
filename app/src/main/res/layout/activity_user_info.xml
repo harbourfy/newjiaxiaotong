@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    tools:context="com.app.jiaxiaotong.activity.UserInfoActivity">
+
+    <include layout="@layout/title_bar" />
+    <include layout="@layout/user_info_top_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@color/app_white"
+        >
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:paddingRight="10dp"
+            android:text="我的身份" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="@drawable/relation_text_color"
+            android:textIsSelectable="true"
+            android:textStyle="bold"
+            android:id="@+id/user_info_mom_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="妈妈" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="@drawable/relation_text_color"
+            android:textStyle="bold"
+            android:id="@+id/user_info_daddy_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="爸爸" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_white"
+        android:textSize="16sp"
+        android:text="@string/change_password" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp      "
+        android:background="@color/app_white"
+        android:padding="10dp"
+        android:id="@+id/user_info_new_password_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_password" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/user_info_jump_tv"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_gravity="bottom"
+            android:textColor="@color/text_yellow"
+            android:background="@drawable/white_radius_bg"
+            android:text="跳过" />
+
+        <TextView
+            android:id="@+id/user_info_sure_tv"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            style="@style/LoginBtnBgTheme"
+            android:text="@string/sure" />
+    </LinearLayout>
+</LinearLayout>
