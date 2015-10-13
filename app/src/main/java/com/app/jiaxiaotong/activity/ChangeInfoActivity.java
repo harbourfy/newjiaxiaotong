@@ -343,6 +343,7 @@ public class ChangeInfoActivity extends BaseActivity implements View.OnClickList
             if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
                 if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_UPDATA_AVATAR)){
                     UserInfoKeeper.writeUserAvatar(activity,((StringModel)baseModel).getResult());
+                    UserInfoKeeper.writeUserAvatarChange(activity,1);
                     ToastUtils.ToastMsg(activity,"修改头像成功！");
                 }
             }else {

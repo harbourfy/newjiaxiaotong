@@ -34,6 +34,7 @@ import com.app.jiaxiaotong.model.BaseModel;
 import com.app.jiaxiaotong.model.LoginModel;
 import com.app.jiaxiaotong.model.UserModel;
 import com.app.jiaxiaotong.utils.ToastUtils;
+import com.app.jiaxiaotong.utils.UserLoginInfoUtils;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
@@ -84,6 +85,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         passwordEt = (EditText) findViewById(R.id.login_activity_password_et);
         Button loginBtn = (Button) findViewById(R.id.login_activity_login_btn);
         TextView forgetPasswordTv = (TextView) findViewById(R.id.login_activity_forget_password_tv);
+        if (!TextUtils.isEmpty(UserLoginInfoUtils.readUserTel(activity)))
+            userNameEt.setText(UserLoginInfoUtils.readUserTel(activity));
         loginBtn.setOnClickListener(this);
         forgetPasswordTv.setOnClickListener(this);
     }
@@ -194,6 +197,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (MainActivity.sMainActivity != null){
                     MainActivity.sMainActivity.finish();
                 }
+                //保存电话号码
+                UserLoginInfoUtils.writeUserTel(activity,userNameEt.getText().toString());
                 Intent intent = new Intent(LoginActivity.this,
                         MainActivity.class);
                 startActivity(intent);

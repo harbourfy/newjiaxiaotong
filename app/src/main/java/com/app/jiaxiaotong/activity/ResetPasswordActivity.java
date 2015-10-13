@@ -27,6 +27,7 @@ import com.app.jiaxiaotong.model.ChangeTelModel;
 import com.app.jiaxiaotong.utils.BackGroudUtils;
 import com.app.jiaxiaotong.utils.ToastUtils;
 import com.app.jiaxiaotong.utils.ToolBarUtils;
+import com.app.jiaxiaotong.utils.UserLoginInfoUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,6 +87,8 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
         codeTv = (TextView) findViewById(R.id.forget_password_activity_get_code_tv);
         Button nextBtn = BackGroudUtils.setLoginButtonStyle(activity,R.id.forget_password_activity_next_btn);
         visibilityIv = (ImageView) findViewById(R.id.forget_password_activity_password_visibility_iv);
+        if (!TextUtils.isEmpty(UserLoginInfoUtils.readUserTel(activity)))
+            userNameEt.setText(UserLoginInfoUtils.readUserTel(activity));
         visibilityIv.setOnClickListener(this);
         nextBtn.setOnClickListener(this);
         codeTv.setOnClickListener(this);

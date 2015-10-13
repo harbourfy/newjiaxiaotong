@@ -31,6 +31,16 @@ public class UserModel extends BaseModel {
     private String relation;
     private String schoolName;
 
+    private int avatarChange = 0;//记录头像是否改变，0为为改变，1为改变
+
+    public int getAvatarChange() {
+        return avatarChange;
+    }
+
+    public void setAvatarChange(int avatarChange) {
+        this.avatarChange = avatarChange;
+    }
+
     public String getMobilePhone() {
         return mobilePhone;
     }

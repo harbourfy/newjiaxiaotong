@@ -20,6 +20,8 @@ public class ShowBigAvatar extends BaseActivity {
         setContentView(R.layout.activity_show_big_image);
         url = getIntent().getExtras().getString("url");
         PhotoView avatar = (PhotoView) findViewById(R.id.image);
+        if (url == null)//防止好友没有设置头像
+            url = "";
         if (url.contains("http"))
             Glide.with(this).load(url).placeholder(R.mipmap.father_default_icon).into(avatar);
         else

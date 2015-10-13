@@ -274,6 +274,15 @@ public class ContactFragment extends Fragment implements LoadFinishedListener {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserInfoKeeper.readUserInfo(getActivity()).getAvatarChange() == 1){
+            adapter.notifyDataSetChanged();
+            UserInfoKeeper.writeUserAvatarChange(getActivity(), 0);
+        }
+    }
+
     // 刷新ui
     public void refresh() {
         try {

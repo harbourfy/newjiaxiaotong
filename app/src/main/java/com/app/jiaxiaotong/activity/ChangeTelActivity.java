@@ -24,6 +24,7 @@ import com.app.jiaxiaotong.model.BaseModel;
 import com.app.jiaxiaotong.model.ChangeTelModel;
 import com.app.jiaxiaotong.utils.ToastUtils;
 import com.app.jiaxiaotong.utils.ToolBarUtils;
+import com.app.jiaxiaotong.utils.UserLoginInfoUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -134,8 +135,8 @@ public class ChangeTelActivity extends BaseActivity implements View.OnClickListe
 
                 }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_CHANGE_TEL)){
                     UserInfoKeeper.writeUserTel(activity,telEt.getText().toString());
-                    startActivity(new Intent(activity,LoginActivity.class));
-                    ToastUtils.ToastMsg(activity,"手机号码修改成功");
+                    startActivity(new Intent(activity, LoginActivity.class));
+                    ToastUtils.ToastMsg(activity, "手机号码修改成功");
                 }
             }else {
                 ToastUtils.ToastMsg(activity,baseModel.getMessage());

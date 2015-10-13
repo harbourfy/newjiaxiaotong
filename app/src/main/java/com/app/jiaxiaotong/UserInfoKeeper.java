@@ -23,6 +23,9 @@ public class UserInfoKeeper {
     private static final String MOBILE_PHONE = "mobilePhone";
     private static final String RELATION = "relation";
     private static final String SCHOOL_NAME = "schoolName";
+    private static final String GENDER = "gender";
+
+    private static final String IS_AVATAR_CHANGE = "is_avatar_change";
 
     private static final String PREFERENCES_NAME = "user_info";
 
@@ -50,6 +53,7 @@ public class UserInfoKeeper {
         editor.putString(RELATION,info.getRelation());
         editor.putString(MOBILE_PHONE,info.getMobilePhone());
         editor.putString(SCHOOL_NAME,info.getSchoolName());
+        editor.putString(GENDER,info.getGender());
         editor.commit();
     }
     /**
@@ -80,6 +84,22 @@ public class UserInfoKeeper {
         SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(AVATAR, ServiceConst.SERVICE_URL + "/api/mobiles/header/" + info);
+
+        editor.commit();
+    }
+    /**
+     * 记录用户头像改变
+     * @param context
+     * @param info
+     */
+    public static void writeUserAvatarChange(Context context,int info){
+        if (null == context ) {
+            return;
+        }
+
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_APPEND);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(IS_AVATAR_CHANGE, info);
 
         editor.commit();
     }
@@ -118,7 +138,9 @@ public class UserInfoKeeper {
         info.setRelation(pref.getString(RELATION, ""));
         info.setSchoolName(pref.getString(SCHOOL_NAME,""));
         String[] userTypes = pref.getString(USER_TYPE, "").split(",");
+        info.setAvatarChange(pref.getInt(IS_AVATAR_CHANGE,0));
         info.setUserTypes(userTypes);
+        info.setGender(pref.getString(GENDER,"m"));
         return info;
     }
 

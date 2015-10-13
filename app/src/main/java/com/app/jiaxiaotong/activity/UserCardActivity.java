@@ -70,17 +70,27 @@ public class UserCardActivity extends BaseActivity implements View.OnClickListen
         else {
             userModel = new ContactModel();
             userid = getIntent().getExtras().getString("username");
-            User user = HXDBManager.getInstance().getContactList().get(userid);
-            if (user != null){
-                userModel.setCn(user.getNick());
-                userModel.setMobilePhone(user.getMobilePhone());
-                userModel.setUid(user.getUsername());
-                userModel.setHeader(user.getAvatar());
-                userModel.setGender(user.getGender());
+            if (userid.equalsIgnoreCase(UserInfoKeeper.readUserInfo(activity).getUid())){
+                userModel.setCn(UserInfoKeeper.readUserInfo(activity).getName());
+                userModel.setMobilePhone(UserInfoKeeper.readUserInfo(activity).getMobilePhone());
+                userModel.setUid(UserInfoKeeper.readUserInfo(activity).getUid());
+                userModel.setHeader(UserInfoKeeper.readUserInfo(activity).getAvatar());
+                userModel.setGender(UserInfoKeeper.readUserInfo(activity).getGender());
                 initView();
-            } else {
-                getUserInfo();
+            }else{
+                User user = HXDBManager.getInstance().getContactList().get(userid);
+                if (user != null){
+                    userModel.setCn(user.getNick());
+                    userModel.setMobilePhone(user.getMobilePhone());
+                    userModel.setUid(user.getUsername());
+                    userModel.setHeader(user.getAvatar());
+                    userModel.setGender(user.getGender());
+                    initView();
+                } else {
+                    getUserInfo();
+                }
             }
+
 
         }
 
