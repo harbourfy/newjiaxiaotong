@@ -336,15 +336,17 @@ public class ChildFragment extends Fragment implements View.OnClickListener, Loa
 
     @Override
     public void loadFinished(BaseModel baseModel) {
-        if (baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_UPDATA_AVATAR)){
-                    ChildrenInfoKeeper.writeUserAvatar(getActivity(),((StringModel)baseModel).getResult(),position);
-                    ToastUtils.ToastMsg(getActivity(),"修改头像成功！");
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_UPDATA_AVATAR)) {
+                        ChildrenInfoKeeper.writeUserAvatar(getActivity(), ((StringModel) baseModel).getResult(), position);
+                        ToastUtils.ToastMsg(getActivity(), "修改头像成功！");
+                    }
+                } else {
+                    ToastUtils.ToastMsg(getActivity(), baseModel.getMessage());
                 }
-            }else {
-                ToastUtils.ToastMsg(getActivity(),baseModel.getMessage());
-            }
-        }else ToastUtils.ToastMsg(getActivity(),baseModel.getMsg());
+            } else ToastUtils.ToastMsg(getActivity(), baseModel.getMsg());
+        }
     }
 }

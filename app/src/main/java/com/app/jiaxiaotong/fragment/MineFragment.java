@@ -233,25 +233,27 @@ public class MineFragment extends Fragment implements View.OnClickListener, Load
     @Override
     public void loadFinished(BaseModel baseModel) {
         dialog.dismiss();
-        if(baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_CHILD_LIST_INFO)){
-                    List<ChildModel> childModels = ((ChildModel)baseModel).getChilds();
-                    ChildrenInfoKeeper.writeChildrenInfo(getActivity(),childModels);
-                    List<ChildFragment> childFragments = new ArrayList<>();
-                    if (childModels != null && childModels.size() > 0) {
-                        if (childModels != null && childModels.size() > 1) {
-                            rightIv.setVisibility(View.VISIBLE);
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_CHILD_LIST_INFO)) {
+                        List<ChildModel> childModels = ((ChildModel) baseModel).getChilds();
+                        ChildrenInfoKeeper.writeChildrenInfo(getActivity(), childModels);
+                        List<ChildFragment> childFragments = new ArrayList<>();
+                        if (childModels != null && childModels.size() > 0) {
+                            if (childModels != null && childModels.size() > 1) {
+                                rightIv.setVisibility(View.VISIBLE);
+                            }
+                            for (int i = 0; i < childModels.size(); i++) {
+                                ChildFragment childFragment = ChildFragment.newInstance(childModels.get(i), i);
+                                childFragments.add(childFragment);
+                            }
+                            adapter = new ChildViewPagerAdapter(getChildFragmentManager(), childFragments);
+                            viewPager.setAdapter(adapter);
                         }
-                        for (int i = 0;i < childModels.size();i++) {
-                            ChildFragment childFragment = ChildFragment.newInstance(childModels.get(i),i);
-                            childFragments.add(childFragment);
-                        }
-                        adapter = new ChildViewPagerAdapter(getChildFragmentManager(), childFragments);
-                        viewPager.setAdapter(adapter);
+
+
                     }
-
-
                 }
             }
         }

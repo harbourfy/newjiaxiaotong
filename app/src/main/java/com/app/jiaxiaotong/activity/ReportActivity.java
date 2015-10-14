@@ -84,7 +84,7 @@ public class ReportActivity extends BaseActivity implements LoadFinishedListener
                 reqMap.put(Constant.UID, UserInfoKeeper.readUserInfo(activity).getUid());
                 reqMap.put(Constant.SOURCE, ServiceConst.SERVICE_REPORT_MESSAGE);
                 Map<String, Object> bodyMap = new HashMap<>();
-                reqMap.put("content", descEt.getText().toString());
+                reqMap.put("content", descEt.getText().toString().replaceAll("\r|\n", "").trim());
                 BaseController.reportMessage(activity, activity, reqMap, bodyMap);
             }
 
@@ -94,17 +94,19 @@ public class ReportActivity extends BaseActivity implements LoadFinishedListener
     @Override
     public void loadFinished(BaseModel baseModel) {
         dialog.dismiss();
-        if (baseModel.getCode() == null){
-            if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_REPORT_MESSAGE)){
-                    ToastUtils.ToastMsg(this, "感谢你的意见反馈！！！");
-                    finish();
-                }
-            }else ToastUtils.ToastMsg(this, baseModel.getMessage());
-        }else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)){//登录过期
-            DialogUtils.loginDialog(this);
-        }else {
-            ToastUtils.ToastMsg(this,baseModel.getMsg());
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_REPORT_MESSAGE)) {
+                        ToastUtils.ToastMsg(this, "感谢你的意见反馈！！！");
+                        finish();
+                    }
+                } else ToastUtils.ToastMsg(this, baseModel.getMessage());
+            } else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)) {//登录过期
+                DialogUtils.loginDialog(this);
+            } else {
+                ToastUtils.ToastMsg(this, baseModel.getMsg());
+            }
         }
     }
 }

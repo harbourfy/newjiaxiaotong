@@ -101,20 +101,22 @@ public class IdentityActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void loadFinished(BaseModel baseModel) {
         dialog.dismiss();
-        if (baseModel.getCode() == null){
-            if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                ToastUtils.ToastMsg(activity,"身份修改成功");
-                Intent intent = new Intent();
-                intent.putExtra("type",type);
-                setResult(RESULT_OK, intent);
-                UserInfoKeeper.writeUserIdentity(activity,type);
-                finish();
+        if (baseModel != null){
+            if (baseModel.getCode() == null){
+                if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
+                    ToastUtils.ToastMsg(activity,"身份修改成功");
+                    Intent intent = new Intent();
+                    intent.putExtra("type",type);
+                    setResult(RESULT_OK, intent);
+                    UserInfoKeeper.writeUserIdentity(activity,type);
+                    finish();
 
-            }else ToastUtils.ToastMsg(activity, baseModel.getMessage());
-        }else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)){//登录过期
-            DialogUtils.loginDialog(activity);
-        }else {
-            ToastUtils.ToastMsg(activity,baseModel.getMessage());
+                }else ToastUtils.ToastMsg(activity, baseModel.getMessage());
+            }else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)){//登录过期
+                DialogUtils.loginDialog(activity);
+            }else {
+                ToastUtils.ToastMsg(activity,baseModel.getMessage());
+            }
         }
     }
 }

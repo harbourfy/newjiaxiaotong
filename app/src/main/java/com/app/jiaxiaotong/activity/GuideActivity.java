@@ -38,11 +38,11 @@ public class GuideActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
 		initView();
-		gestureDetector = new GestureDetector(new GuideViewTouch());
+//		gestureDetector = new GestureDetector(new GuideViewTouch());
 		// 获取分辨率
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		flaggingWidth = dm.widthPixels / 3;
+//		DisplayMetrics dm = new DisplayMetrics();
+//		getWindowManager().getDefaultDisplay().getMetrics(dm);
+//		flaggingWidth = dm.widthPixels / 3;
 	}
 
 	private void initView() {
@@ -74,9 +74,9 @@ public class GuideActivity extends BaseActivity{
 			@Override
 			public void onPageSelected(int arg0) {
 				if (arg0 == 2) {
-					skipIv.setVisibility(View.GONE);
-				}else {
 					skipIv.setVisibility(View.VISIBLE);
+				}else {
+					skipIv.setVisibility(View.GONE);
 				}
 				count = arg0;
 			}
@@ -92,36 +92,36 @@ public class GuideActivity extends BaseActivity{
 		});
 		
 	}
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent event) {
-		if (gestureDetector.onTouchEvent(event)) {
-			event.setAction(MotionEvent.ACTION_CANCEL);
-		}
-		return super.dispatchTouchEvent(event);
-	}
-	private GestureDetector gestureDetector; // 用户滑动
-	/** 记录当前分页ID */
-	private int flaggingWidth;// 互动翻页所需滚动的长度是当前屏幕宽度的1/3
-	private class GuideViewTouch extends GestureDetector.SimpleOnGestureListener {
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-							   float velocityY) {
-			if (count == 2) {
-				if (Math.abs(e1.getX() - e2.getX()) > Math.abs(e1.getY()
-						- e2.getY())
-						&& (e1.getX() - e2.getX() <= (-flaggingWidth) || e1
-						.getX() - e2.getX() >= flaggingWidth)) {
-					if (e1.getX() - e2.getX() >= flaggingWidth) {
-						Intent updataIntent = new Intent(activity, LoginActivity.class);
-						startActivity(updataIntent);
-						finish();
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-	}
+//	@Override
+//	public boolean dispatchTouchEvent(MotionEvent event) {
+//		if (gestureDetector.onTouchEvent(event)) {
+//			event.setAction(MotionEvent.ACTION_CANCEL);
+//		}
+//		return super.dispatchTouchEvent(event);
+//	}
+//	private GestureDetector gestureDetector; // 用户滑动
+//	/** 记录当前分页ID */
+//	private int flaggingWidth;// 互动翻页所需滚动的长度是当前屏幕宽度的1/3
+//	private class GuideViewTouch extends GestureDetector.SimpleOnGestureListener {
+//		@Override
+//		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+//							   float velocityY) {
+//			if (count == 2) {
+//				if (Math.abs(e1.getX() - e2.getX()) > Math.abs(e1.getY()
+//						- e2.getY())
+//						&& (e1.getX() - e2.getX() <= (-flaggingWidth) || e1
+//						.getX() - e2.getX() >= flaggingWidth)) {
+//					if (e1.getX() - e2.getX() >= flaggingWidth) {
+//						Intent updataIntent = new Intent(activity, LoginActivity.class);
+//						startActivity(updataIntent);
+//						finish();
+//						return true;
+//					}
+//				}
+//			}
+//			return false;
+//		}
+//	}
 	class GuidePagerAdapter extends PagerAdapter{
 		
 		@Override

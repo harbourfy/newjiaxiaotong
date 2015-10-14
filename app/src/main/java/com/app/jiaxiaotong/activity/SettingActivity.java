@@ -106,12 +106,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void loadFinished(BaseModel baseModel) {
         dialog.dismiss();
-        if (baseModel.getCode() == null) {
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_SERVICE_TEL)) {
-                    StringModel telModel = (StringModel) baseModel;
-                    serverPhoneTv.setText("服务热线（" + telModel.getResult() + "）");
-                    tel = telModel.getResult();
+        if (baseModel !=  null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_SERVICE_TEL)) {
+                        StringModel telModel = (StringModel) baseModel;
+                        serverPhoneTv.setText("服务热线（" + telModel.getResult() + "）");
+                        tel = telModel.getResult();
+                    }
                 }
             }
         }

@@ -283,10 +283,5 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void loadFinished(BaseModel baseModel) {
-        if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-            if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_USERINFO)){
-
-            }
-        }
     }
 }

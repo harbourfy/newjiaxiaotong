@@ -339,16 +339,19 @@ public class ChangeInfoActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void loadFinished(BaseModel baseModel) {
-        if (baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_UPDATA_AVATAR)){
-                    UserInfoKeeper.writeUserAvatar(activity,((StringModel)baseModel).getResult());
-                    UserInfoKeeper.writeUserAvatarChange(activity,1);
-                    ToastUtils.ToastMsg(activity,"修改头像成功！");
+        if (baseModel !=null){
+            if (baseModel.getCode() == null){
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_UPDATA_AVATAR)){
+                        UserInfoKeeper.writeUserAvatar(activity,((StringModel)baseModel).getResult());
+                        UserInfoKeeper.writeUserAvatarChange(activity,1);
+                        ToastUtils.ToastMsg(activity,"修改头像成功！");
+                    }
+                }else {
+                    ToastUtils.ToastMsg(activity,baseModel.getMessage());
                 }
-            }else {
-                ToastUtils.ToastMsg(activity,baseModel.getMessage());
-            }
-        }else ToastUtils.ToastMsg(activity,baseModel.getMsg());
+            }else ToastUtils.ToastMsg(activity,baseModel.getMsg());
+        }
+
     }
 }

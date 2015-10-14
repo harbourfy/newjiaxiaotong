@@ -97,7 +97,7 @@ public class DataController {
 //			String returnMsg = "";
 			// 如果返回的数据为空，则返回null
 			if (StringUtil.isEmpty(returnMsg)) {
-				return new BaseModel();
+				return null;
 			}
 
 			// 定义返回model

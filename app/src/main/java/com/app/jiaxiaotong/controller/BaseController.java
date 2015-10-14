@@ -129,14 +129,17 @@ public class BaseController {
         @Override
         protected void onPostExecute(BaseModel result) {
             super.onPostExecute(result);
-            if (loadFinished != null) {
-                if (result != null) {
+            if (loadFinished != null && result != null) {
+                if (result.getCode() == null){
                     result.setActionType(actionType);
                     loadFinished.loadFinished(result);
-
-                }else {
-                    loadFinished.loadFinished(null);
+                }else{
+                    loadFinished.loadFinished(result);
+                    ToastUtils.ToastMsg(context, result.getMsg());
                 }
+            }else{
+                loadFinished.loadFinished(null);
+                ToastUtils.ToastMsg(context, "服务器异常");
             }
         }
     }
@@ -171,7 +174,7 @@ public class BaseController {
         @Override
         protected void onPostExecute(BaseModel result) {
             super.onPostExecute(result);
-            if (loadFinished != null) {
+            if (loadFinished != null && result != null) {
                 if (result.getCode() == null){
                     result.setActionType(actionType);
                     loadFinished.loadFinished(result);
@@ -179,6 +182,9 @@ public class BaseController {
                     loadFinished.loadFinished(result);
                     ToastUtils.ToastMsg(context, result.getMsg());
                 }
+            }else{
+                loadFinished.loadFinished(null);
+                ToastUtils.ToastMsg(context, "服务器异常");
             }
         }
     }
@@ -216,7 +222,7 @@ public class BaseController {
         @Override
         protected void onPostExecute(BaseModel result) {
             super.onPostExecute(result);
-            if (loadFinished != null) {
+            if (loadFinished != null && result != null) {
                 if (result.getCode() == null){
                     result.setActionType(actionType);
                     loadFinished.loadFinished(result);
@@ -224,6 +230,9 @@ public class BaseController {
                     loadFinished.loadFinished(result);
                     ToastUtils.ToastMsg(activity, result.getMsg());
                 }
+            }else{
+                loadFinished.loadFinished(null);
+                ToastUtils.ToastMsg(activity, "服务器异常");
             }
         }
     }

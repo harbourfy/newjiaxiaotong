@@ -136,20 +136,22 @@ public class ChangePasswordActivity extends BaseActivity implements LoadFinished
     @Override
     public void loadFinished(BaseModel baseModel) {
         dialog.dismiss();
-        if (baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_CHANGE_PASSWORD)){
-                    finish();
-                    ToastUtils.ToastMsg(activity,baseModel.getMessage());
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_CHANGE_PASSWORD)) {
+                        finish();
+                        ToastUtils.ToastMsg(activity, baseModel.getMessage());
+                    }
+                } else {
+                    ToastUtils.ToastMsg(activity, "修改密码失败");
                 }
-            }else {
-                ToastUtils.ToastMsg(activity,"修改密码失败");
-            }
 
-        }else{
-            if (baseModel.getMsg() != null)
-                ToastUtils.ToastMsg(activity,baseModel.getMsg());
-            else ToastUtils.ToastMsg(activity,"网络错误");
+            } else {
+                if (baseModel.getMsg() != null)
+                    ToastUtils.ToastMsg(activity, baseModel.getMsg());
+                else ToastUtils.ToastMsg(activity, "网络错误");
+            }
         }
     }
     class ChildrenAdapter extends ArrayAdapter<ChildModel>{

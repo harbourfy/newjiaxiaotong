@@ -56,7 +56,7 @@ public class ChangeTelActivity extends BaseActivity implements View.OnClickListe
         authCodeEt = (EditText) findViewById(R.id.change_tel_code_et);
         TextView nextTv = (TextView) findViewById(R.id.change_tel_next_btn);
         getCodeTv.setOnClickListener(this);
-        nextTv.setOnClickListener(this);
+        nextTv.setOnClickListener(this);//下一步
 
     }
 
@@ -123,30 +123,31 @@ public class ChangeTelActivity extends BaseActivity implements View.OnClickListe
     }
     @Override
     public void loadFinished(BaseModel baseModel) {
-        if (baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_AUTHCODE)){
-                    ToastUtils.ToastMsg(activity,"验证码已发送");
-                }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_VERIFY_AUTHCODE)){
-                    ChangeTelModel telModel = (ChangeTelModel) baseModel;
-                    if (telModel.isResult()){
-                        changeTel();
-                    }else ToastUtils.ToastMsg(activity,"验证码错误");
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_AUTHCODE)) {
+                        ToastUtils.ToastMsg(activity, "验证码已发送");
+                    } else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_VERIFY_AUTHCODE)) {
+                        ChangeTelModel telModel = (ChangeTelModel) baseModel;
+                        if (telModel.isResult()) {
+                            changeTel();
+                        } else ToastUtils.ToastMsg(activity, "验证码错误");
 
-                }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_CHANGE_TEL)){
-                    UserInfoKeeper.writeUserTel(activity,telEt.getText().toString());
-                    startActivity(new Intent(activity, LoginActivity.class));
-                    ToastUtils.ToastMsg(activity, "手机号码修改成功");
+                    } else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_CHANGE_TEL)) {
+                        UserInfoKeeper.writeUserTel(activity, telEt.getText().toString());
+                        startActivity(new Intent(activity, LoginActivity.class));
+                        ToastUtils.ToastMsg(activity, "手机号码修改成功");
+                    }
+                } else {
+                    ToastUtils.ToastMsg(activity, baseModel.getMessage());
+                    cancleTimeCount();
                 }
-            }else {
-                ToastUtils.ToastMsg(activity,baseModel.getMessage());
+            } else {
+                ToastUtils.ToastMsg(activity, baseModel.getMsg() + "");
                 cancleTimeCount();
             }
-        }else {
-            ToastUtils.ToastMsg(activity,baseModel.getMsg() + "");
-            cancleTimeCount();
         }
-
     }
 
     private void cancleTimeCount(){

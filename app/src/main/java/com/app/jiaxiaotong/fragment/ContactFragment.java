@@ -211,66 +211,68 @@ public class ContactFragment extends Fragment implements LoadFinishedListener {
     public void loadFinished(BaseModel baseModel) {
 //        loadingDialog.dismiss();
         progressBar.setVisibility(View.GONE);
-        if (baseModel.getCode() == null){
-            if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_FAMILY_CONTACT_LIST)){
-                    contactList = ((ContactModel)baseModel).getResult();
-                    // 排序
-                    Collections.sort(contactList, new Comparator<ContactModel>() {
-                        @Override
-                        public int compare(ContactModel lhs, ContactModel rhs) {
-                            return lhs.getCn().compareTo(rhs.getCn());
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_FAMILY_CONTACT_LIST)) {
+                        contactList = ((ContactModel) baseModel).getResult();
+                        // 排序
+                        Collections.sort(contactList, new Comparator<ContactModel>() {
+                            @Override
+                            public int compare(ContactModel lhs, ContactModel rhs) {
+                                return lhs.getCn().compareTo(rhs.getCn());
+                            }
+                        });
+                        List<User> users = new ArrayList<>();
+                        //设置头部标签，保存用户信息到数据库
+                        for (int i = 0; i < contactList.size(); i++) {
+                            contactList.get(i).setHeaderTxt(GetFirstLetter.getFristChar(contactList.get(i).getCn()));
+                            User user = new User();
+                            user.setAvatar(ServiceConst.SERVICE_URL + "/api/mobiles/header/" + contactList.get(i).getHeader());
+                            user.setNick(contactList.get(i).getCn());
+                            user.setUsername(contactList.get(i).getUid());
+                            user.setGender(contactList.get(i).getGender());
+                            user.setMobilePhone(contactList.get(i).getMobilePhone());
+                            users.add(user);
                         }
-                    });
-                    List<User> users = new ArrayList<>();
-                    //设置头部标签，保存用户信息到数据库
-                    for (int i= 0;i < contactList.size(); i++){
-                        contactList.get(i).setHeaderTxt(GetFirstLetter.getFristChar(contactList.get(i).getCn()));
-                        User user = new User();
-                        user.setAvatar( ServiceConst.SERVICE_URL + "/api/mobiles/header/" + contactList.get(i).getHeader());
-                        user.setNick(contactList.get(i).getCn());
-                        user.setUsername(contactList.get(i).getUid());
-                        user.setGender(contactList.get(i).getGender());
-                        user.setMobilePhone(contactList.get(i).getMobilePhone());
-                        users.add(user);
-                    }
-                    //排序
-                    Collections.sort(contactList, new Comparator<ContactModel>() {
-                        @Override
-                        public int compare(ContactModel lhs, ContactModel rhs) {
-                            return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
-                        }
-                    });
+                        //排序
+                        Collections.sort(contactList, new Comparator<ContactModel>() {
+                            @Override
+                            public int compare(ContactModel lhs, ContactModel rhs) {
+                                return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
+                            }
+                        });
 //                    ((MyHXSDKHelper)HXSDKHelper.getInstance()).updateContactList(users);
-                    //存入内存
-                    Map<String, User> userlist = new HashMap<String, User>();
-                    for (User user : users) {
-                        String username = user.getUsername();
-                        userlist.put(username, user);
-                    }
-                    AppContext.getAppContext().setContactList(userlist);
-                    new UserDao(getActivity()).saveContactList(users);
-                    // 设置adapter
-                    adapter = new ContactListAdapter(getActivity(), R.layout.row_contact, contactList);
-                    listView.setAdapter(adapter);
-                }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_TEACHER_CLASS_LIST)){
-                    contactList = ((ContactModel)baseModel).getResult();
-                    // 排序
-                    Collections.sort(contactList, new Comparator<ContactModel>() {
-                        @Override
-                        public int compare(ContactModel lhs, ContactModel rhs) {
-                            return lhs.getCn().compareTo(rhs.getCn());
+                        //存入内存
+                        Map<String, User> userlist = new HashMap<String, User>();
+                        for (User user : users) {
+                            String username = user.getUsername();
+                            userlist.put(username, user);
                         }
-                    });
-                    // 设置adapter
-                    adapter = new ContactListAdapter(getActivity(), R.layout.row_contact, contactList);
-                    listView.setAdapter(adapter);
-                }
-            }else ToastUtils.ToastMsg(getActivity(),baseModel.getMessage());
-        }else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)){//登录过期
-            DialogUtils.loginDialog(getActivity());
-        }else {
-            ToastUtils.ToastMsg(getActivity(),baseModel.getMessage());
+                        AppContext.getAppContext().setContactList(userlist);
+                        new UserDao(getActivity()).saveContactList(users);
+                        // 设置adapter
+                        adapter = new ContactListAdapter(getActivity(), R.layout.row_contact, contactList);
+                        listView.setAdapter(adapter);
+                    } else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_TEACHER_CLASS_LIST)) {
+                        contactList = ((ContactModel) baseModel).getResult();
+                        // 排序
+                        Collections.sort(contactList, new Comparator<ContactModel>() {
+                            @Override
+                            public int compare(ContactModel lhs, ContactModel rhs) {
+                                return lhs.getCn().compareTo(rhs.getCn());
+                            }
+                        });
+                        // 设置adapter
+                        adapter = new ContactListAdapter(getActivity(), R.layout.row_contact, contactList);
+                        listView.setAdapter(adapter);
+                    }
+                } else ToastUtils.ToastMsg(getActivity(), baseModel.getMessage());
+            } else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)) {//登录过期
+                DialogUtils.loginDialog(getActivity());
+            } else {
+                ToastUtils.ToastMsg(getActivity(), baseModel.getMessage());
+            }
         }
     }
 

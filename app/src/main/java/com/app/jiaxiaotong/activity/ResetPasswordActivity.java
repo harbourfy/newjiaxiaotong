@@ -147,27 +147,29 @@ public class ResetPasswordActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void loadFinished(BaseModel baseModel) {
-        if (baseModel.getCode() == null){
-            if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_AUTHCODE)){
-                    ToastUtils.ToastMsg(activity, "验证码已发送");
-                }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_VERIFY_AUTHCODE)){
-                    ChangeTelModel telModel = (ChangeTelModel) baseModel;
-                    if (telModel.isResult()){
-                        resetPassword();
-                    }else ToastUtils.ToastMsg(activity,"验证码错误");
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_AUTHCODE)) {
+                        ToastUtils.ToastMsg(activity, "验证码已发送");
+                    } else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_VERIFY_AUTHCODE)) {
+                        ChangeTelModel telModel = (ChangeTelModel) baseModel;
+                        if (telModel.isResult()) {
+                            resetPassword();
+                        } else ToastUtils.ToastMsg(activity, "验证码错误");
 
-                }else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_FORGET_PASSWORD)){
-                    ToastUtils.ToastMsg(activity,"密码重置成功！");
-                    finish();
+                    } else if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_FORGET_PASSWORD)) {
+                        ToastUtils.ToastMsg(activity, "密码重置成功！");
+                        finish();
+                    }
+                } else {
+                    ToastUtils.ToastMsg(activity, baseModel.getMessage());
+                    cancleTimeCount();
                 }
-            }else {
-                ToastUtils.ToastMsg(activity,baseModel.getMessage());
+            } else {
+                ToastUtils.ToastMsg(activity, baseModel.getMsg() + "");
                 cancleTimeCount();
             }
-        }else {
-            ToastUtils.ToastMsg(activity,baseModel.getMsg() + "");
-            cancleTimeCount();
         }
     }
 

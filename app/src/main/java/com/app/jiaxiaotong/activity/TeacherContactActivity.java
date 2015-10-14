@@ -120,66 +120,68 @@ public class TeacherContactActivity extends BaseActivity implements OnClickListe
     public void loadFinished(BaseModel baseModel) {
 //        loadingDialog.dismiss();
         dialog.dismiss();
-        if (baseModel.getCode() == null){
-            if(baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)){
-                if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_TEACHER_CONTACT_LIST)){
-                    allContactModel.addAll(((ContactModel) baseModel).getResult());
+        if (baseModel != null) {
+            if (baseModel.getCode() == null) {
+                if (baseModel.getStatus().equalsIgnoreCase(ResultCode.SUCCESS)) {
+                    if (baseModel.getActionType().equalsIgnoreCase(ServiceConst.SERVICE_GET_TEACHER_CONTACT_LIST)) {
+                        allContactModel.addAll(((ContactModel) baseModel).getResult());
 
-                    //分类
-                    for (ContactModel contactModel : allContactModel){
-                        if (contactModel.getRole().equalsIgnoreCase("teacher")){
-                            teacherContactModel.add(contactModel);
-                        }else familyContactModel.add(contactModel);
-                    }
-                    List<User> users = new ArrayList<>();
-                    //设置头部标签，保存用户信息到数据库
-                    for (int i= 0;i < allContactModel.size(); i++){
-                        allContactModel.get(i).setHeaderTxt(GetFirstLetter.getFristChar(allContactModel.get(i).getCn()));
-                        User user = new User();
-                        user.setAvatar( ServiceConst.SERVICE_URL + "/api/mobiles/header/" + allContactModel.get(i).getHeader());
-                        user.setNick(allContactModel.get(i).getCn());
-                        user.setUsername(allContactModel.get(i).getUid());
-                        user.setGender(allContactModel.get(i).getGender());
-                        user.setMobilePhone(allContactModel.get(i).getMobilePhone());
-                        users.add(user);
-                    }
-                    //排序
-                    Collections.sort(teacherContactModel, new Comparator<ContactModel>() {
-                        @Override
-                        public int compare(ContactModel lhs, ContactModel rhs) {
-                            return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
+                        //分类
+                        for (ContactModel contactModel : allContactModel) {
+                            if (contactModel.getRole().equalsIgnoreCase("teacher")) {
+                                teacherContactModel.add(contactModel);
+                            } else familyContactModel.add(contactModel);
                         }
-                    });
-                    //排序
-                    Collections.sort(familyContactModel
-                            , new Comparator<ContactModel>() {
-                        @Override
-                        public int compare(ContactModel lhs, ContactModel rhs) {
-                            return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
+                        List<User> users = new ArrayList<>();
+                        //设置头部标签，保存用户信息到数据库
+                        for (int i = 0; i < allContactModel.size(); i++) {
+                            allContactModel.get(i).setHeaderTxt(GetFirstLetter.getFristChar(allContactModel.get(i).getCn()));
+                            User user = new User();
+                            user.setAvatar(ServiceConst.SERVICE_URL + "/api/mobiles/header/" + allContactModel.get(i).getHeader());
+                            user.setNick(allContactModel.get(i).getCn());
+                            user.setUsername(allContactModel.get(i).getUid());
+                            user.setGender(allContactModel.get(i).getGender());
+                            user.setMobilePhone(allContactModel.get(i).getMobilePhone());
+                            users.add(user);
                         }
-                    });
-                    //存入内存
-                    Map<String, User> userlist = new HashMap<String, User>();
-                    for (User user : users) {
-                        String username = user.getUsername();
-                        userlist.put(username, user);
+                        //排序
+                        Collections.sort(teacherContactModel, new Comparator<ContactModel>() {
+                            @Override
+                            public int compare(ContactModel lhs, ContactModel rhs) {
+                                return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
+                            }
+                        });
+                        //排序
+                        Collections.sort(familyContactModel
+                                , new Comparator<ContactModel>() {
+                            @Override
+                            public int compare(ContactModel lhs, ContactModel rhs) {
+                                return lhs.getHeaderTxt().compareTo(rhs.getHeaderTxt());
+                            }
+                        });
+                        //存入内存
+                        Map<String, User> userlist = new HashMap<String, User>();
+                        for (User user : users) {
+                            String username = user.getUsername();
+                            userlist.put(username, user);
+                        }
+                        AppContext.getAppContext().setContactList(userlist);
+                        new UserDao(TeacherContactActivity.this).saveContactList(users);
+                        familyFragment = TeacherContactListFragment.newInstance(familyContactModel);
+                        teacherFragment = TeacherContactListFragment.newInstance(teacherContactModel);
+                        // 添加显示第一个fragment
+                        getSupportFragmentManager().beginTransaction()
+                                .add(R.id.contact_fragment_container, teacherFragment)
+                                .add(R.id.contact_fragment_container, familyFragment)
+                                .hide(familyFragment).show(teacherFragment)
+                                .commit();
                     }
-                    AppContext.getAppContext().setContactList(userlist);
-                    new UserDao(TeacherContactActivity.this).saveContactList(users);
-                    familyFragment = TeacherContactListFragment.newInstance(familyContactModel);
-                    teacherFragment = TeacherContactListFragment.newInstance(teacherContactModel);
-                    // 添加显示第一个fragment
-                    getSupportFragmentManager().beginTransaction()
-                            .add(R.id.contact_fragment_container, teacherFragment)
-                            .add(R.id.contact_fragment_container, familyFragment)
-                            .hide(familyFragment).show(teacherFragment)
-                            .commit();
-                }
-            }else ToastUtils.ToastMsg(this, baseModel.getMessage());
-        }else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)){//登录过期
-            DialogUtils.loginDialog(this);
-        }else {
-            ToastUtils.ToastMsg(this,baseModel.getMessage());
+                } else ToastUtils.ToastMsg(this, baseModel.getMessage());
+            } else if (baseModel.getCode().equalsIgnoreCase(Constant.TOEKN_EXPIRE)) {//登录过期
+                DialogUtils.loginDialog(this);
+            } else {
+                ToastUtils.ToastMsg(this, baseModel.getMessage());
+            }
         }
     }
 }
