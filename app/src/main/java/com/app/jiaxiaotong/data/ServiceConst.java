@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ServiceConst {
 	
-	public static final String SERVICE_URL = "http://121.40.193.59:7890";
+	public static final String SERVICE_URL = "http://121.40.78.2:7890";
 
 	public static final String SERVICE_LOGIN = "001";//登录
 

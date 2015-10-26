@@ -97,8 +97,14 @@ public class UserUtils {
 					public void handleMessage(Message msg) {
 						super.handleMessage(msg);
 						UserModel contactModel = (UserModel) msg.obj;
+						if (contactModel != null)
 						Glide.with(context)
 								.load(ServiceConst.SERVICE_URL + "/api/mobiles/header/" + contactModel.getAvatar())
+								.transform(new GlideCircleTransform(context))
+								.placeholder(R.mipmap.default_avatar)
+								.into(imageView);
+						else Glide.with(context)
+								.load(ServiceConst.SERVICE_URL + "/api/mobiles/header/" + "")
 								.transform(new GlideCircleTransform(context))
 								.placeholder(R.mipmap.default_avatar)
 								.into(imageView);
@@ -162,10 +168,12 @@ public class UserUtils {
 					public void handleMessage(Message msg) {
 						super.handleMessage(msg);
 						UserModel contactModel = (UserModel) msg.obj;
-						if (TextUtils.isEmpty(contactModel.getName())){
-							textView.setText(username);
-						}else
-							textView.setText(contactModel.getName());
+						if (contactModel != null) {
+							if (TextUtils.isEmpty(contactModel.getName())) {
+								textView.setText(username);
+							} else
+								textView.setText(contactModel.getName());
+						}
 					}
 				};
 				new Thread(new Runnable() {

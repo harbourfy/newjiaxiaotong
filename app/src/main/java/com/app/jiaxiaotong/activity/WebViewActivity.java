@@ -31,6 +31,10 @@ public class WebViewActivity extends BaseActivity {
 
     private ProgressWebView webView;
 
+    private static final String NOTIFY_URL = "http://121.40.78.2:8220";
+
+    private static final String CHECK_RUL = "http://121.40.78.2:7891";
+
     String url;
 
     private int type;//0为考勤，1为公告
@@ -45,16 +49,16 @@ public class WebViewActivity extends BaseActivity {
         if (type == 0){
             ToolBarUtils.initToolBar(this,"考勤中心");
             if (userModel.getType().equalsIgnoreCase(Constant.TEACHER)){
-                url = BASE_URL + "/api/app/statisticsindex.do/"+ userModel.getUid();
+                url = CHECK_RUL + "/api/app/statisticsindex.do/"+ userModel.getUid();
             }else {
-                url = BASE_URL + "/api/app/checkchild/" + userModel.getUid();
+                url = CHECK_RUL + "/api/app/checkchild/" + userModel.getUid();
             }
         }else{
             ToolBarUtils.initToolBar(this,"公告");
             if (userModel.getType().equalsIgnoreCase(Constant.TEACHER)){
-                url = BASE_URL + "/api/app/teacher/annoucementlist/"+ userModel.getUid();
+                url = NOTIFY_URL + "/api/app/teacher/annoucementlist/"+ userModel.getUid();
             }else {
-                url = BASE_URL + "/api/app/family/annoucementlist/" + userModel.getUid();
+                url = NOTIFY_URL + "/api/app/family/annoucementlist/" + userModel.getUid();
             }
         }
 //        url = "http://www.baidu.com";
