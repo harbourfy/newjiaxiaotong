@@ -44,7 +44,7 @@ public class BaseController {
     }
 
     public static void forgetPassword(BaseActivity context,LoadFinishedListener loadFinished,Map<String, Object> reqMap){
-        new GetAsyncTask(context,loadFinished, ServiceConst.SERVICE_FORGET_PASSWORD).execute(reqMap);
+        new PostAsyncTask(context,loadFinished, ServiceConst.SERVICE_FORGET_PASSWORD).execute(reqMap);
     }
 
     public static void changePassword(BaseActivity context,LoadFinishedListener loadFinished,Map<String, Object> reqMap){

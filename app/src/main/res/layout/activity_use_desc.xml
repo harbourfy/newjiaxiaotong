@@ -15,7 +15,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="家校通使用条款"
+                android:text="初源使用条款"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:gravity="center"/>
             <TextView

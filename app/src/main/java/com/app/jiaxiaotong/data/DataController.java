@@ -68,7 +68,7 @@ public class DataController {
 			e1.printStackTrace();
 		}
 
-		return new BaseModel();
+		return null;
 	}
 
 	public static Object postModelFromService(Map<String, Object> params,Map<String,Object> bodyMap) {

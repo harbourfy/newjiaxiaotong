@@ -14,7 +14,7 @@ android {
         applicationId "com.app.jiaxiaotong"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode
+        versionCode 1
         versionName "1.0"
     }
     buildTypes {

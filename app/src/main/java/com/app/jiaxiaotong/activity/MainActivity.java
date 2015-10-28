@@ -31,7 +31,6 @@ import com.app.jiaxiaotong.im.domain.InviteMessage;
 import com.app.jiaxiaotong.im.domain.User;
 import com.app.jiaxiaotong.im.utils.CommonUtils;
 import com.app.jiaxiaotong.listener.OnMessageIsReadListener;
-import com.app.jiaxiaotong.utils.ToastUtils;
 import com.easemob.EMCallBack;
 import com.easemob.EMConnectionListener;
 import com.easemob.EMError;

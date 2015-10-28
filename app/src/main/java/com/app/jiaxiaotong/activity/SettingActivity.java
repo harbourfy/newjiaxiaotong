@@ -57,7 +57,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         TextView aboutAppTv = (TextView) findViewById(R.id.setting_about_app_tv);
         TextView clearCacheTv = (TextView) findViewById(R.id.setting_clear_cache_tv);
         TextView loginOutTv = (TextView) findViewById(R.id.setting_logout_tv);
-        serverPhoneTv.setText("服务热线" + "(15108273746)");
+        serverPhoneTv.setText("服务热线");
         serverPhoneTv.setOnClickListener(this);
         reportInfoTv.setOnClickListener(this);
         aboutAppTv.setOnClickListener(this);

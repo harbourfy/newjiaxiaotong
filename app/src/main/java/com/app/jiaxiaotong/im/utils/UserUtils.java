@@ -120,7 +120,10 @@ public class UserUtils {
 						reqMap.put("url",ServiceConst.SERVICE_URL + "/open/api/mobiles/chat/" + username);
 						UserModel	baseModel = (UserModel) DataController.getModelFromService(reqMap, null);
 						Message msg = new Message();
-						msg.obj = baseModel.getDetails();
+						if (baseModel != null)
+							msg.obj = baseModel.getDetails();
+						else
+							msg.obj = null;
 						handler.sendMessage(msg);
 					}
 				}).start();
@@ -186,7 +189,10 @@ public class UserUtils {
 						reqMap.put("url",ServiceConst.SERVICE_URL + "/open/api/mobiles/chat/" + username);
 						UserModel	baseModel = (UserModel) DataController.getModelFromService(reqMap, null);
 						Message msg = new Message();
-						msg.obj = baseModel.getDetails();
+						if (baseModel != null)
+							msg.obj = baseModel.getDetails();
+						else
+							msg.obj = null;
 						handler.sendMessage(msg);
 					}
 				}).start();
